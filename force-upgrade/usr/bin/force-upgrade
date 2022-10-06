@@ -27,10 +27,11 @@ keyserver hkps://keys.openpgp.org
 keyserver hkps://keyserver.ubuntu.com' > /etc/pacman.d/gnupg/gpg.conf
 
 rm /var/lib/pacman/sync*
-pacman-key init
+rm -R /etc/pacman.d/gnupg
+pacman-key --init
 #gpg --refresh-keys
 pacman-key --populate archlinux manjaro biglinux
-pacman-key --refresh-keys
+#pacman-key --refresh-keys
 yes y | LANG=C pacman -Syy archlinux-keyring manjaro-keyring
 
 #Add BigLinux key
