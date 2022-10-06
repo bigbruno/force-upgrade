@@ -13,6 +13,10 @@ case "$1" in
 
     --fix-keys)
 
+rm /var/lib/pacman/sync/*
+rm -R /etc/pacman.d/gnupg
+mkdir -p /etc/pacman.d/gnupg
+
 echo 'no-greeting
 no-permission-warning
 lock-never
@@ -26,13 +30,11 @@ keyserver hkps://hkps.pool.sks-keyservers.net
 keyserver hkps://keys.openpgp.org
 keyserver hkps://keyserver.ubuntu.com' > /etc/pacman.d/gnupg/gpg.conf
 
-rm /var/lib/pacman/sync*
-rm -R /etc/pacman.d/gnupg
 #Add BigLinux key
 pacman-key --keyserver hkps://keys.openpgp.org -r 0x45EC44879815E2A6
 pacman-key --lsign-key 0x45EC44879815E2A6
-yes y | LANG=C pacman -Syy archlinux-keyring manjaro-keyring
-yes y | LANG=C pacman -Syy biglinux-keyring
+yes y | LANG=C pacman -Syy archlinux-keyring manjaro-keyring --noconfirm
+yes y | LANG=C pacman -Syy biglinux-keyring --noconfirm
 
 pacman-key --init
 #gpg --refresh-keys
