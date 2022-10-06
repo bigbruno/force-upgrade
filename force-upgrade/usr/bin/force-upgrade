@@ -14,6 +14,7 @@ case "$1" in
     --fix-keys)
 
 rm /var/lib/pacman/sync/*
+rm /var/cache/pacman/pkg/*
 rm -R /etc/pacman.d/gnupg
 mkdir -p /etc/pacman.d/gnupg
 
